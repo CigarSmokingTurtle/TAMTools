@@ -8,12 +8,15 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class TAMToolsMAINWINDOW(object):
+class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1100, 700)
         MainWindow.setMinimumSize(QtCore.QSize(1100, 700))
         MainWindow.setMaximumSize(QtCore.QSize(1100, 700))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../../../PyPosty/PycharmProjects/PyPosty/src/hammer-and-sickle-md.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.postButton = QtWidgets.QPushButton(self.centralwidget)
@@ -333,7 +336,6 @@ class TAMToolsMAINWINDOW(object):
         self.menuMenu.addSeparator()
         self.menuMenu.addAction(self.actionQuit)
         self.menuSettings.addAction(self.actionGlobals)
-        self.menuSettings.addAction(self.actionDefaults)
         self.menuSettings.addSeparator()
         self.menuSettings.addAction(self.actionDebug)
         self.menuHelp.addAction(self.actionTutorial)
@@ -345,7 +347,7 @@ class TAMToolsMAINWINDOW(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

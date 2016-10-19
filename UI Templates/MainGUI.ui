@@ -1,8 +1,1220 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'MainGUI.py'
-#
-# Created by: PyQt5 UI code generator 5.7
-#
-# WARNING! All changes made in this file will be lost!
-
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1100</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1100</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1100</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>TAMTools v.01</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../PyPosty/PycharmProjects/PyPosty/src/hammer-and-sickle-md.png</normaloff>../../../PyPosty/PycharmProjects/PyPosty/src/hammer-and-sickle-md.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="postButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>620</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Post!</string>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>1081</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Install</string>
+     </attribute>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>47</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Data:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="installTabUsertimeCheck">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;ONLY ENABLE &lt;/span&gt;when you want an exact time. Default will use current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Usertime</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="installTabUsertimeValue">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>30</y>
+        <width>391</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="text">
+       <string>Device UA:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="installTabUserAgentValue">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>60</y>
+        <width>391</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>90</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Origination IP Address&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="text">
+       <string>IP Address:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="installTabIPValue">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>90</y>
+        <width>391</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>120</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="text">
+       <string>Device IDs:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="installTabIDValue1">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>140</y>
+        <width>391</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="installTabPayloadPreview">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>30</y>
+        <width>451</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;JSON Payload Preview &lt;span style=&quot; font-weight:600;&quot;&gt;DO NOT EDIT &lt;/span&gt;unless you know what you're doing&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="installTabEditCheck">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>30</y>
+        <width>70</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;DO NOT CHECK&lt;/span&gt; unless you're familiar with JSON payloads&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Edit</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="installTabIDSelect1">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>140</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>&lt;none&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IDFA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ADID</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Android</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MAC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IMEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ODIN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="installTabIDSelect2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>170</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>&lt;none&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IDFA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ADID</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Android</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MAC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IMEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ODIN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="installTabIDSelect3">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>200</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>&lt;none&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IDFA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ADID</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Android</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MAC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IMEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ODIN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="installTabIDSelect4">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>230</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>&lt;none&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IDFA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ADID</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Android</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MAC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IMEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ODIN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="installTabIDSelect5">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>260</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>&lt;none&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IDFA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ADID</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Android</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MAC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IMEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ODIN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="installTabIDSelect6">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>290</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>&lt;none&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IDFA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ADID</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Android</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MAC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IMEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ODIN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLineEdit" name="installTabIDValue2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>170</y>
+        <width>391</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="installTabIDValue3">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>200</y>
+        <width>391</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="installTabIDValue4">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>230</y>
+        <width>391</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="installTabIDValue5">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>260</y>
+        <width>391</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="installTabIDValue6">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>290</y>
+        <width>391</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Event</string>
+     </attribute>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>47</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Data:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="eventTabUsertimeCheck">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;ONLY ENABLE &lt;/span&gt;when you want an exact time. Default will use current time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Usertime</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_13">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>30</y>
+        <width>391</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="text">
+       <string>Device UA:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="eventTabUserAgentValue">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>60</y>
+        <width>391</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>90</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Origination IP Address&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="text">
+       <string>IP Address:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="eventTabIPValue">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>90</y>
+        <width>391</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>120</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="text">
+       <string>Device IDs:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="eventTabIDSelect1">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>140</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>&lt;none&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IDFA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ADID</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Android</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MAC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IMEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ODIN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLineEdit" name="eventTabIDValue1">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>140</y>
+        <width>391</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="eventTabIDSelect2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>170</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>&lt;none&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IDFA</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ADID</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Android</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MAC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>IMEI</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ODIN</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLineEdit" name="eventTabIDValue2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>170</y>
+        <width>391</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="eventTabPayloadPreview">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>30</y>
+        <width>451</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;JSON Payload Preview &lt;span style=&quot; font-weight:600;&quot;&gt;DO NOT EDIT &lt;/span&gt;unless you know what you're doing&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="eventTabEditCheck">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>30</y>
+        <width>70</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;DO NOT CHECK&lt;/span&gt; unless you're familiar with JSON payloads&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Edit</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>200</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="text">
+       <string>Event Name:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="eventTabEventNameValue">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>200</y>
+        <width>391</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>230</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="text">
+       <string>Event Data:</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="eventTabEventDataValue">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>230</y>
+        <width>391</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <property name="placeholderText">
+       <string>{ 	&quot;id&quot; : &quot;123&quot; 	&quot;name&quot; : &quot;test_item&quot; 	&quot;currency&quot; : &quot;USD&quot; 	&quot;sum&quot; : &quot;200&quot; }</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Custom</string>
+     </attribute>
+     <widget class="QTextEdit" name="customTabPayloadValue">
+      <property name="geometry">
+       <rect>
+        <x>3</x>
+        <y>40</y>
+        <width>1071</width>
+        <height>371</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="customTabGETRadio">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>51</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>GET</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="customTabPOSTRadio">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>10</y>
+        <width>61</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>POST</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="customTabPayloadTypeValue">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>10</y>
+        <width>211</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>JSON</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>HTML</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>XML</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QTextEdit" name="serverResponseCodeAll">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>490</y>
+      <width>1071</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Server response code window&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="postQtyValue">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>620</y>
+      <width>37</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>620</y>
+      <width>521</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="value">
+     <number>50</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="statusCodeBar">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>620</y>
+      <width>401</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Individual payload server response window&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="endpointSelector">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>10</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Kochava</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Custom</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Endpoint:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="endpointValue">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>10</y>
+      <width>401</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>http://control.kochava.com/track/json</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>10</y>
+      <width>61</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>App GUID:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="appGUIDValue">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>10</y>
+      <width>441</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>koconversionsdemo174ea19bc63928c</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1100</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuSave">
+     <property name="title">
+      <string>Save</string>
+     </property>
+     <addaction name="actionSave_All"/>
+     <addaction name="actionSave_As_2"/>
+    </widget>
+    <addaction name="actionOpen"/>
+    <addaction name="menuSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionGlobals"/>
+    <addaction name="separator"/>
+    <addaction name="actionDebug"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionTutorial"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionUrl_Parser"/>
+    <addaction name="actionJSON_Parser"/>
+   </widget>
+   <addaction name="menuMenu"/>
+   <addaction name="menuSettings"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open...</string>
+   </property>
+  </action>
+  <action name="actionSave_As">
+   <property name="text">
+    <string>Save As...</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionGlobals">
+   <property name="text">
+    <string>Globals</string>
+   </property>
+  </action>
+  <action name="actionDefaults">
+   <property name="text">
+    <string>Defaults</string>
+   </property>
+  </action>
+  <action name="actionSave_All">
+   <property name="text">
+    <string>Save All</string>
+   </property>
+  </action>
+  <action name="actionSave_As_2">
+   <property name="text">
+    <string>Save As...</string>
+   </property>
+  </action>
+  <action name="actionTutorial">
+   <property name="text">
+    <string>Tutorial</string>
+   </property>
+  </action>
+  <action name="actionDebug">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Debug</string>
+   </property>
+  </action>
+  <action name="actionUrl_Parser">
+   <property name="text">
+    <string>Url Parser</string>
+   </property>
+  </action>
+  <action name="actionJSON_Parser">
+   <property name="text">
+    <string>JSON Parser</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
