@@ -1,6 +1,7 @@
 # ---------------------------------------
 #
-#
+#   Technical Account Manager Tools
+#   v.1
 #
 # ---------------------------------------
 
@@ -16,9 +17,11 @@ import EditGlobalsGUI
 
 # - 3rd Party Modules
 import requests
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget
+from urllib.parse import urlparse
+from urllib.request import url2pathname
 
-# -- Impost Dependancies --
+# -- Import Dependancies --
 
 
 # - App Class
@@ -52,8 +55,24 @@ class UrlParserGUI(QWidget, UrlParserGUI.UrlParserWIDGET):
         super().__init__()
         self.setupUi(self)
 
+        # - Set Trigger
+        self.pushButton.clicked.connect(self.parseUrl)
+
     def showSelf(self):
         self.show()
+
+    def parseUrl(self):
+        self.parsedUrlWindow.clear()
+        url = self.originalUrlWindow.toPlainText()
+        parsedurl = str(urlparse(url))
+        parsedurl = parsedurl.replace(',', '\n')
+        parsedurl = parsedurl.replace('&', '\n')
+        parsedurl = str(url2pathname(parsedurl))
+        parsedurl = parsedurl.replace('query=\'', 'query=\n')
+
+        # report parsed url
+        self.parsedUrlWindow.setPlainText(parsedurl)
+
 
 # - Global Editing Window -
 class GlobalsGUI(QWidget, EditGlobalsGUI.EditGlobalsWIDGET):

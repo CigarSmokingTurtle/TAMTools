@@ -1,0 +1,13 @@
+Version .1
+Main
+-Complete functionality of JSON Posts for install, events, and custom
+-Progress Bar functionality
+
+Globals
+-Add/Remove Globals Key/Value pairs
+
+Url Parser
+-Add features for more precise control over parsing
+
+JSON Parser
+-Get window implemented?
