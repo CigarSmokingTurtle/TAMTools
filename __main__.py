@@ -55,9 +55,12 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
         self.actionUrl_Parser.triggered.connect(self.parser.showSelf)
         self.actionJSON_Parser.triggered.connect(self.formatter.showSelf)
         self.actionGlobals.triggered.connect(self.globals.showSelf)
-        self.postButton.clicked.connect(self.createPayload)
+        self.installTabValidateButton.clicked.connect(self.validatePayload)
+        self.eventTabValidateButton.clicked.connect(self.validatePayload)
+        self.customTabValidateButton.clicked.connect(self.validatePayload)
+        self.postButton.clicked.connect(self.sendPayload)
 
-    def createPayload(self):
+    def validatePayload(self):
         if (self.tabWidget.currentIndex() == 0):
             idfa = '"' + self.installTabUserAgentValue.text() + '"'
             ua = '"' + self.installTabUserAgentValue.text() + '"'
@@ -85,7 +88,7 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
                                             }
                                         },
                                         "kochava_app_id": %s,
-                                        "action": "install",
+                                        "action": "install"
                                     }""" % (ua, origip, idfa, appguid)
             self.installTabPayloadPreview.clear()
             while (True):
@@ -124,7 +127,7 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
                                                 "sum": 100
                                             }
                                             },
-                                        "action": "event",,
+                                        "action": "event",
                                         "kochava_app_id": %s
                                     }""" % (appversion, idfa, ua, deviceversion, eventname, origip, appguid)
             self.eventTabPayloadPreview.clear()
@@ -154,6 +157,31 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
                     return None
 
             return MainGUI.payload
+
+    def sendPayload(self):
+        if (self.appGUIDValue.text() != ''):
+            newendpoint = self.appGUIDValue.text()
+        else:
+            newendpoint = MainGUI.endpoint
+        newendpoint = 'http://control.kochava.com/track/json'
+        newpayload = self.validatePayload()
+        self.serverResponseCodeAll.setPlainText('')
+        x = 1
+        while x <= self.postQtyValue.value():
+            while (True):
+                try:
+                    r = requests.post(newendpoint, newpayload)
+                    if (self.serverResponseCodeAll.toPlainText() == ''):
+                        self.serverResponseCodeAll.setPlainText(str(r.json))
+                    else:
+                        self.serverResponseCodeAll.setPlainText(self.serverResponseCodeAll.toPlainText() + '\n' + str(r.json))
+                    break
+                except ValueError:
+                    self.serverResponseCodeAll.setPlainText('Error sending payload! Sorry...')
+                    return 1
+            x += 1
+        return 0
+
 
     # - Sub Widgets
     def openParser(self):
@@ -206,8 +234,7 @@ class UrlParserGUI(QWidget, UrlParserGUI.UrlParserWIDGET):
         parsedurl = 'Invalid Url'
 
         while (True):
-            try:
-                # parsedurl = parsedurl.replace('query=\'', 'query=\n')
+            try:                # parsedurl = parsedurl.replace('query=\'', 'query=\n')
                 parsedurl = str(urlparse(url))
                 break
             except OSError as ve:
@@ -233,18 +260,6 @@ class GlobalsGUI(QWidget, EditGlobalsGUI.EditGlobalsWIDGET):
 
     def showSelf(self):
         self.show()
-
-# - Send JSON Payload
-def SendPayload(endpoint, payload, response = True):
-    r = requests.post(endpoint, payload)
-    while (response == True):
-        try:
-            return str(r.json())
-            break
-        except ValueError:
-            return None
-            pass
-    return None
 
 # -- Main --
 if __name__ == '__main__':
