@@ -163,7 +163,6 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
             newendpoint = self.appGUIDValue.text()
         else:
             newendpoint = MainGUI.endpoint
-        newendpoint = 'http://control.kochava.com/track/json'
         newpayload = self.validatePayload()
         self.serverResponseCodeAll.setPlainText('')
         x = 1

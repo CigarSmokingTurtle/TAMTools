@@ -12,6 +12,8 @@ class EditGlobalsWIDGET(object):
     def setupUi(self, globalsEditor):
         globalsEditor.setObjectName("globalsEditor")
         globalsEditor.resize(654, 476)
+        globalsEditor.setMinimumSize(QtCore.QSize(654, 476))
+        globalsEditor.setMaximumSize(QtCore.QSize(654, 476))
         self.columnView = QtWidgets.QColumnView(globalsEditor)
         self.columnView.setGeometry(QtCore.QRect(10, 50, 581, 411))
         self.columnView.setObjectName("columnView")
