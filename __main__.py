@@ -10,6 +10,7 @@
 # - Core Python Modules
 import sys
 import json
+import jsonschema
 
 # - UI Modules -
 import MainGUI
@@ -28,6 +29,12 @@ from urllib.request import url2pathname
 
 # - App Class
 class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
+
+    # - Class Globals
+    endpoint = 'http://control.kochava.com/track/json'
+    payload = '{"data":"derp"}'
+    currentTab = 'Install'
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -48,8 +55,107 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
         self.actionUrl_Parser.triggered.connect(self.parser.showSelf)
         self.actionJSON_Parser.triggered.connect(self.formatter.showSelf)
         self.actionGlobals.triggered.connect(self.globals.showSelf)
+        self.postButton.clicked.connect(self.createPayload)
 
-    # - Parser Sub
+    def createPayload(self):
+        if (self.tabWidget.currentIndex() == 0):
+            idfa = '"' + self.installTabUserAgentValue.text() + '"'
+            ua = '"' + self.installTabUserAgentValue.text() + '"'
+            origip = '"' + self.eventTabIPValue.text() + '"'
+            appguid = '"' + self.appGUIDValue.text() + '"'
+
+            MainGUI.payload = """{
+                                        "data": {
+                                            "usertime": "",
+                                            "device_ua": %s,
+                                            "conversion_data": {
+                                                "utm_campaign": "",
+                                                "utm_medium": "",
+                                                "utm_source": ""
+                                            },
+                                            "origination_ip": %s,
+                                            "device_ids": {
+                                                "udid": "",
+                                                "mac": "",
+                                                "idfa": %s,
+                                                "imei": "",
+                                                "adid": "",
+                                                "odin": "",
+                                                "android_id": ""
+                                            }
+                                        },
+                                        "kochava_app_id": %s,
+                                        "action": "install",
+                                    }""" % (ua, origip, idfa, appguid)
+            self.installTabPayloadPreview.clear()
+            while (True):
+                try:
+                    MainGUI.payload = json.loads(MainGUI.payload)
+                    self.installTabPayloadPreview.setPlainText(json.dumps(MainGUI.payload, indent=6))
+                    break
+                except ValueError as ve:
+                    self.installTabPayloadPreview.setPlainText('Invalid JSON scrub! \n \n' + str(ve) + '\n \n' + MainGUI.payload)
+                    return None
+
+            return MainGUI.payload
+        elif (self.tabWidget.currentIndex() == 1):
+            appversion = '"1.0"'
+            idfa = '"' + self.eventTabUserAgentValue.text() + '"'
+            ua = '"' + self.eventTabUserAgentValue.text() + '"'
+            deviceversion = '"1.1"'
+            eventname = '"' + self.eventTabEventNameValue.text() + '"'
+            origip = '"' + self.eventTabIPValue.text() + '"'
+            appguid = '"' + self.appGUIDValue.text() + '"'
+
+            MainGUI.payload = """{
+                                        "data": {
+                                            "app_version": %s,
+                                            "device_ids": {
+                                                "idfa": %s
+                                            },
+                                            "device_ua": %s,
+                                            "device_ver": %s,
+                                            "event_name": %s,
+                                            "origination_ip": %s,
+                                            "event_data": {
+                                                "id": "123",
+                                                "name": "Shoes",
+                                                "currency": "USD",
+                                                "sum": 100
+                                            }
+                                            },
+                                        "action": "event",,
+                                        "kochava_app_id": %s
+                                    }""" % (appversion, idfa, ua, deviceversion, eventname, origip, appguid)
+            self.eventTabPayloadPreview.clear()
+            while (True):
+                try:
+                    MainGUI.payload = json.loads(MainGUI.payload)
+                    self.eventTabPayloadPreview.setPlainText(json.dumps(MainGUI.payload, indent=6))
+                    break
+                except ValueError as ve:
+                    self.eventTabPayloadPreview.setPlainText('Invalid JSON scrub! \n \n' + str(ve) + '\n \n' + MainGUI.payload)
+                    return None
+
+            return MainGUI.payload
+        elif (self.tabWidget.currentIndex() == 2):
+            MainGUI.payload = """{
+                                        "data": {
+                                        }
+                                    }"""
+            self.customTabPayloadValue.clear()
+            while (True):
+                try:
+                    MainGUI.payload = json.loads(MainGUI.payload)
+                    self.customTabPayloadValue.setPlainText(json.dumps(MainGUI.payload, indent=6))
+                    break
+                except ValueError as ve:
+                    self.customTabPayloadValue.setPlainText('Invalid JSON scrub! \n \n' + str(ve) + '\n \n' + MainGUI.payload)
+                    return None
+
+            return MainGUI.payload
+
+    # - Sub Widgets
     def openParser(self):
         self.parser.showSelf()
 
@@ -72,14 +178,14 @@ class JSONParserGUI(QWidget, JSONParserGUI.JSONParserWIDGET):
         self.show()
 
     def formatJSON(self):
+        rawJSON = self.originalJSONWindow.toPlainText()
         while (True):
             try:
-                rawJSON = self.originalJSONWindow.toPlainText()
                 formattedJSON = json.loads(rawJSON)
-                self.parsedJSONWindow.setPlainText(json.dumps(formattedJSON, indent=4))
+                self.parsedJSONWindow.setPlainText(json.dumps(formattedJSON, indent=6))
                 break
-            except ValueError:
-                self.parsedJSONWindow.setPlainText("Invalid JSON Payload")
+            except ValueError as ve:
+                self.parsedJSONWindow.setPlainText('Invalid JSON scrub! \n \n' + str(ve) + '\n \n' + rawJSON)
                 break
 
 # - Url Parser Window -
@@ -98,20 +204,24 @@ class UrlParserGUI(QWidget, UrlParserGUI.UrlParserWIDGET):
         self.parsedUrlWindow.clear()
         url = self.originalUrlWindow.toPlainText()
         parsedurl = 'Invalid Url'
+
         while (True):
             try:
-                parsedurl = parsedurl.replace(',', '\n')
-                parsedurl = parsedurl.replace('&', '\n')
                 # parsedurl = parsedurl.replace('query=\'', 'query=\n')
                 parsedurl = str(urlparse(url))
+                break
+            except OSError as ve:
+                self.parsedUrlWindow.setPlainText('Invalid Url \n \n' + str(ve))
+                return None
+        while (True):
+            try:
                 parsedurl = str(url2pathname(parsedurl))
-
                 break
-            except ValueError:
-                self.parsedUrlWindow.setPlainText('Invalid Url')
-                break
-
-        # report parsed url
+            except OSError as ve:
+                self.parsedUrlWindow.setPlainText('Invalid Url \n \n' + str(ve))
+                return None
+        parsedurl = parsedurl.replace(',', '\n')
+        parsedurl = parsedurl.replace('&', '\n')
         self.parsedUrlWindow.setPlainText(parsedurl)
 
 
@@ -124,6 +234,17 @@ class GlobalsGUI(QWidget, EditGlobalsGUI.EditGlobalsWIDGET):
     def showSelf(self):
         self.show()
 
+# - Send JSON Payload
+def SendPayload(endpoint, payload, response = True):
+    r = requests.post(endpoint, payload)
+    while (response == True):
+        try:
+            return str(r.json())
+            break
+        except ValueError:
+            return None
+            pass
+    return None
 
 # -- Main --
 if __name__ == '__main__':
