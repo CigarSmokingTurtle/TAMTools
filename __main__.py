@@ -8,9 +8,16 @@
 # -- Import Dependancies --
 
 # - Core Python Modules
-import sys
+import os, sys, inspect
+
+# Set Relative Path
+cmd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))
+if cmd_folder not in sys.path:
+    sys.path.insert(0, cmd_folder)
+cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0],"pynsist_pkgs")))
+if cmd_subfolder not in sys.path:
+     sys.path.insert(0, cmd_subfolder)
 import json
-import jsonschema
 
 # - UI Modules -
 import MainGUI
@@ -165,7 +172,9 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
             newendpoint = MainGUI.endpoint
         newpayload = self.validatePayload()
         self.serverResponseCodeAll.setPlainText('')
+        self.progressBar.setValue(0)
         x = 1
+        progress = 0
         while x <= self.postQtyValue.value():
             while (True):
                 try:
@@ -174,6 +183,7 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
                         self.serverResponseCodeAll.setPlainText(str(r.json))
                     else:
                         self.serverResponseCodeAll.setPlainText(self.serverResponseCodeAll.toPlainText() + '\n' + str(r.json))
+                    self.progressBar.setValue((100 / self.postQtyValue.value()) * x)
                     break
                 except ValueError:
                     self.serverResponseCodeAll.setPlainText('Error sending payload! Sorry...')

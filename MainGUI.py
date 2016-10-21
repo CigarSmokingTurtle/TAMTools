@@ -270,7 +270,7 @@ class Ui_MainWindow(object):
         self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
         self.progressBar.setGeometry(QtCore.QRect(150, 620, 521, 21))
         self.progressBar.setAutoFillBackground(False)
-        self.progressBar.setProperty("value", 50)
+        self.progressBar.setProperty("value", 0)
         self.progressBar.setOrientation(QtCore.Qt.Horizontal)
         self.progressBar.setInvertedAppearance(False)
         self.progressBar.setObjectName("progressBar")
@@ -361,7 +361,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "TAMTools v.01"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "TAMTools v1.0 RC"))
         self.postButton.setText(_translate("MainWindow", "Post!"))
         self.tabWidget.setToolTip(_translate("MainWindow", "<html><head/><body><p><br/></p></body></html>"))
         self.label_3.setText(_translate("MainWindow", "Data:"))
