@@ -461,7 +461,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Endpoint:"))
         self.endpointValue.setPlaceholderText(_translate("MainWindow", "http://control.kochava.com/track/json"))
         self.label_2.setText(_translate("MainWindow", "App GUID:"))
-        self.appGUIDValue.setPlaceholderText(_translate("MainWindow", "koconversionsdemo174ea19bc63928c"))
+        self.appGUIDValue.setPlaceholderText(_translate("MainWindow", "kopapa-gwan-s-forge-103d87ps"))
         self.menuMenu.setTitle(_translate("MainWindow", "File"))
         self.menuSave.setTitle(_translate("MainWindow", "Save"))
         self.menuSettings.setTitle(_translate("MainWindow", "Settings"))
