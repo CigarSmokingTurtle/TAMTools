@@ -1,3 +1,7 @@
+#!python3.5
+import sys
+sys.path.insert(0, 'pkgs')
+
 # ---------------------------------------
 #
 #   Technical Account Manager Tools
@@ -8,34 +12,21 @@
 # -- Import Dependancies --
 
 # - Core Python Modules
-import os, sys, inspect
-
-# Set Relative Path
-cmd_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0]))
-if cmd_folder not in sys.path:
-    sys.path.insert(0, cmd_folder)
-cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0],"pynsist_pkgs")))
-if cmd_subfolder not in sys.path:
-     sys.path.insert(0, cmd_subfolder)
+import datetime
 import json
-
-# - UI Modules -
-import MainGUI
-import UrlParserGUI
-import EditGlobalsGUI
-import JSONParserGUI
-
-# - 3rd Party Modules
-import requests
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget
+import time
 from urllib.parse import urlparse
 from urllib.request import url2pathname
 
+import requests
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget
+
+from tamtools import JSONParserGUI, UrlParserGUI, MainGUI, EditGlobalsGUI
 # -- Import Dependancies --
 
 
 # - App Class
-class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
+class MainGui(QMainWindow, MainGUI.Ui_MainWindow):
 
     # - Class Globals
     endpoint = 'http://control.kochava.com/track/json'
@@ -47,11 +38,11 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
         self.setupUi(self)
 
         # - Instantiate Parser Widget -
-        self.parser = UrlParserGUI()
+        self.parser = UrlParserGui()
         self.parser.hide()
 
         # - Instantiate Formatter Widget
-        self.formatter = JSONParserGUI()
+        self.formatter = JSONParserGui()
         self.formatter.hide()
 
         # - Instantiate Globals Widget -
@@ -137,10 +128,17 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
 
     def validatePayload(self):
         if (self.tabWidget.currentIndex() == 0):
-            idfa = '"' + self.installTabUserAgentValue.text() + '"'
-            ua = '"' + self.installTabUserAgentValue.text() + '"'
-            origip = '"' + self.installTabIPValue.text() + '"'
-            if (self.appGUIDValue.text() != ""):
+            if (self.installTabUserAgentValue.text() != ''):
+                ua = '"	python-requests/2.11.1"'
+            else:
+                ct = time.time()
+                ua = '"' + str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d')) + '"'
+            if (self.installTabIPValue.text() != ''):
+                origip = '"' + self.installTabIPValue.text() + '"'
+            else:
+                ct = time.time()
+                origip = '"' + str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d')) + '-ua"'
+            if (self.appGUIDValue.text() != ''):
                 appguid = '"' + self.appGUIDValue.text() + '"'
             else:
                 appguid = '"kopapa-gwan-s-forge-103d87ps"'
@@ -158,10 +156,11 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
                                 deviceIDs = deviceIDs + ',' + '\n' + '"' + self.installTabIDSelect5.currentText() + '":"' + self.installTabIDValue5.text() + '"'
                                 if (self.installTabIDSelect6.currentText() != '<none>'):
                                     deviceIDs = deviceIDs + ',' + '\n' + '"' + self.installTabIDSelect6.currentText() + '":"' + self.installTabIDValue6.text() + '"'
+            else:
+                deviceIDs = '"device_id":"none"'
 
             MainGUI.payload = """{
                                         "data": {
-                                            "usertime": "",
                                             "device_ua": %s,
                                             "conversion_data": {
                                                 "utm_campaign": "",
@@ -188,22 +187,32 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
 
             return self.installTabPayloadPreview.toPlainText()
         elif (self.tabWidget.currentIndex() == 1):
-            appversion = '"1.0"'
-            idfa = '"' + self.eventTabUserAgentValue.text() + '"'
-            ua = '"' + self.eventTabUserAgentValue.text() + '"'
-            deviceversion = '"1.1"'
-            eventname = '"' + self.eventTabEventNameValue.text() + '"'
-            origip = '"' + self.eventTabIPValue.text() + '"'
-            if (self.appGUIDValue.text() != ""):
+            if (self.eventTabUserAgentValue.text() != ''):
+                ua = '"' + self.eventTabUserAgentValue.text() + '"'
+            else:
+                ct = time.time()
+                ua = '"' + str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d')) + '-UA"'
+            if (self.eventTabIPValue.text() != ''):
+                origip = '"' + self.eventTabIPValue.text() + '"'
+            else:
+                origip = '"127.0.0.1"'
+            if (self.appGUIDValue.text() != ''):
                 appguid = '"' + self.appGUIDValue.text() + '"'
             else:
                 appguid = '"kopapa-gwan-s-forge-103d87ps"'
-
+            if (self.eventTabEventNameValue.text() != ''):
+                eventname = '"' + self.eventTabEventNameValue.text() + '"'
+            else:
+                eventname = '"Test Event"'
+            appversion = '"1.0"'
+            deviceversion = '"1.1"'
             deviceIDs = '"":""'
             if (self.eventTabIDSelect1.currentText() != '<none>'):
                 deviceIDs = '"' + self.eventTabIDSelect1.currentText() + '":"' + self.eventTabIDValue1.text() + '"'
                 if (self.eventTabIDSelect2.currentText() != '<none>'):
                     deviceIDs = deviceIDs + ',' + '\n' + '"' + self.eventTabIDSelect2.currentText() + '":"' + self.eventTabIDValue2.text() + '"'
+            else:
+                deviceIDs = '"device_id":"none"'
 
             MainGUI.payload = """{
                                         "data": {
@@ -272,16 +281,23 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
         while x <= self.postQtyValue.value():
             while (True):
                 try:
-                    r = requests.post(newendpoint, json=newpayload)
+                    r = requests.post(newendpoint, data=newpayload)
 
                     if (self.serverResponseCodeAll.toPlainText() == ''):
-                        self.serverResponseCodeAll.setPlainText(str(r.json))
-                    else:
-                        self.serverResponseCodeAll.setPlainText(self.serverResponseCodeAll.toPlainText() + '\n' + str(r.json))
+                        self.serverResponseCodeAll.setPlainText(str(r.text))
                         self.progressBar.setValue((100 / self.postQtyValue.value()) * x)
+                    else:
+                        self.serverResponseCodeAll.setPlainText(self.serverResponseCodeAll.toPlainText() + '\n' + str(r.text))
+                        self.progressBar.setValue((100 / self.postQtyValue.value()) * x)
+
+                    # Dump Headers if in DBUG mode
+                    if (self.actionDebug.isChecked()):
+                        self.serverResponseCodeAll.setPlainText( self.serverResponseCodeAll.toPlainText() + '\n' + str(r.headers))
+
+                    self.writeLog(newendpoint, newpayload, str(r.status_code))
                     break
                 except MissingSchema:
-                    self.serverResponseCodeAll.setPlainText('Missing Schema Error' + str(MissingSchema))
+                    self.serverResponseCodeAll.setPlainText('Missing Schema Error \m' + str(MissingSchema))
                     return 4
                 except ConnectionError:
                     self.serverResponseCodeAll.setPlainText('Connection Error' + str(ConnectionError))
@@ -294,6 +310,16 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
             x += 1
         return 0
 
+    def writeLog(self, endpoint, payload, status):
+        ct = time.time()
+        newlog = 'log%s.txt' %str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d'))
+        log = open(newlog, 'a')
+        log.write(str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d %H:%M:%S')) + '\n')
+        log.write(endpoint + '\n')
+        log.write(json.dumps(payload) + '\n')
+        log.write(status + '\n')
+
+        log.close()
 
     # - Sub Widgets
     def openParser(self):
@@ -306,7 +332,7 @@ class MainGUI(QMainWindow, MainGUI.Ui_MainWindow):
         self.globals.showSelf()
 
 # - JSON Formatter Window -
-class JSONParserGUI(QWidget, JSONParserGUI.JSONParserWIDGET):
+class JSONParserGui(QWidget, JSONParserGUI.JSONParserWIDGET):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -321,6 +347,8 @@ class JSONParserGUI(QWidget, JSONParserGUI.JSONParserWIDGET):
         rawJSON = self.originalJSONWindow.toPlainText()
         while (True):
             try:
+                rawJSON = rawJSON.replace('\\n', '')
+                rawJSON = rawJSON.replace('\\', '')
                 formattedJSON = json.loads(rawJSON)
                 self.parsedJSONWindow.setPlainText(json.dumps(formattedJSON, indent=6))
                 break
@@ -329,7 +357,7 @@ class JSONParserGUI(QWidget, JSONParserGUI.JSONParserWIDGET):
                 break
 
 # - Url Parser Window -
-class UrlParserGUI(QWidget, UrlParserGUI.UrlParserWIDGET):
+class UrlParserGui(QWidget, UrlParserGUI.UrlParserWIDGET):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -374,10 +402,12 @@ class GlobalsGUI(QWidget, EditGlobalsGUI.EditGlobalsWIDGET):
         self.show()
 
 # -- Main --
-if __name__ == '__main__':
+def main():
     a = QApplication(sys.argv)
-    app = MainGUI()
+    app = MainGui()
     app.show()
 
 
     sys.exit(a.exec_())
+
+main()
