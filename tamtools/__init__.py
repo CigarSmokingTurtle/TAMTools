@@ -129,21 +129,20 @@ class MainGui(QMainWindow, MainGUI.Ui_MainWindow):
     def validatePayload(self):
         if (self.tabWidget.currentIndex() == 0):
             if (self.installTabUserAgentValue.text() != ''):
-                ua = '"	python-requests/2.11.1"'
+                ua = '"' + self.installTabUserAgentValue.text() + '"'
             else:
                 ct = time.time()
-                ua = '"' + str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d')) + '"'
+                ua = '"' + str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d')) + '-UA"'
             if (self.installTabIPValue.text() != ''):
                 origip = '"' + self.installTabIPValue.text() + '"'
             else:
                 ct = time.time()
-                origip = '"' + str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d')) + '-ua"'
+                origip = '"127.0.0.1"'
             if (self.appGUIDValue.text() != ''):
                 appguid = '"' + self.appGUIDValue.text() + '"'
             else:
                 appguid = '"kopapa-gwan-s-forge-103d87ps"'
 
-            deviceIDs = '"":""'
             if(self.installTabIDSelect1.currentText() != '<none>'):
                 deviceIDs = '"' + self.installTabIDSelect1.currentText() + '":"' + self.installTabIDValue1.text() + '"'
                 if(self.installTabIDSelect2.currentText() != '<none>'):
@@ -157,7 +156,8 @@ class MainGui(QMainWindow, MainGUI.Ui_MainWindow):
                                 if (self.installTabIDSelect6.currentText() != '<none>'):
                                     deviceIDs = deviceIDs + ',' + '\n' + '"' + self.installTabIDSelect6.currentText() + '":"' + self.installTabIDValue6.text() + '"'
             else:
-                deviceIDs = '"device_id":"none"'
+                ct = time.time()
+                deviceIDs = '"custom":"' + str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d')) + '-test-device-id"'
 
             MainGUI.payload = """{
                                         "data": {
@@ -206,13 +206,13 @@ class MainGui(QMainWindow, MainGUI.Ui_MainWindow):
                 eventname = '"Test Event"'
             appversion = '"1.0"'
             deviceversion = '"1.1"'
-            deviceIDs = '"":""'
             if (self.eventTabIDSelect1.currentText() != '<none>'):
                 deviceIDs = '"' + self.eventTabIDSelect1.currentText() + '":"' + self.eventTabIDValue1.text() + '"'
                 if (self.eventTabIDSelect2.currentText() != '<none>'):
                     deviceIDs = deviceIDs + ',' + '\n' + '"' + self.eventTabIDSelect2.currentText() + '":"' + self.eventTabIDValue2.text() + '"'
             else:
-                deviceIDs = '"device_id":"none"'
+                ct = time.time()
+                deviceIDs = '"custom":"' + str(datetime.datetime.fromtimestamp(ct).strftime('%Y-%m-%d')) +'-test-device-id"'
 
             MainGUI.payload = """{
                                         "data": {
