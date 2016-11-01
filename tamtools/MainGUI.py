@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(1100, 700))
         MainWindow.setMaximumSize(QtCore.QSize(1100, 700))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../PycharmProjects/PyPosty/src/hammer-and-sickle-md.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("star-512.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")

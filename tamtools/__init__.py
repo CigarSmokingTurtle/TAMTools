@@ -19,7 +19,9 @@ from urllib.parse import urlparse
 from urllib.request import url2pathname
 
 import requests
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QSplashScreen
+from PyQt5.QtGui import QPixmap
+from PyQt5 import QtCore
 
 from tamtools import JSONParserGUI, UrlParserGUI, MainGUI, EditGlobalsGUI
 # -- Import Dependancies --
@@ -404,6 +406,12 @@ class GlobalsGUI(QWidget, EditGlobalsGUI.EditGlobalsWIDGET):
 # -- Main --
 def main():
     a = QApplication(sys.argv)
+
+    splash_img = QPixmap('splash-600.png')
+    splash = QSplashScreen(splash_img, QtCore.Qt.WindowStaysOnTopHint)
+    splash.show()
+    time.sleep(3)
+    splash.hide()
     app = MainGui()
     app.show()
 
